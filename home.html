@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flora Haven - Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #2d6a4f;
+  --green-light: #40916c;
+  --green-pale: #d8f3dc;
+  --amber: #e07b28;
+  --amber-dark: #c96d1c;
+  --cream: #faf7f2;
+  --dark: #1a1a1a;
+  --text: #3d3d3d;
+  --shadow: 0 8px 32px rgba(45,106,79,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'DM Sans',sans-serif; background:var(--cream); color:var(--text); }
+
+/* NAVBAR */
+nav {
+  position:sticky; top:0; z-index:1000;
+  background:rgba(26,26,26,0.97);
+  backdrop-filter:blur(12px);
+  padding:0 48px;
+  display:flex; align-items:center; justify-content:space-between;
+  height:64px;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.nav-logo { font-family:'Playfair Display',serif; color:#fff; font-size:22px; letter-spacing:1px; text-decoration:none; }
+.nav-logo span { color:var(--amber); }
+.nav-links a {
+  color:rgba(255,255,255,0.82); margin-left:32px; text-decoration:none;
+  font-size:14px; font-weight:500; letter-spacing:0.4px;
+  transition:color 0.2s;
+}
+.nav-links a:hover { color:var(--amber); }
+
+/* HERO */
+.hero {
+  position:relative; height:92vh; min-height:600px;
+  display:flex; align-items:flex-end;
+  overflow:hidden;
+  padding-bottom: 72px;
+}
+.hero-bg {
+  position:absolute; inset:0;
+  background:url('bg.jpg') center/cover no-repeat;
+}
+.hero-bg::after {
+  content:''; position:absolute; inset:0;
+  background: linear-gradient(to top, rgba(20,20,20,0.82) 0%, rgba(20,20,20,0.35) 55%, transparent 100%);
+}
+.hero-content {
+  position:relative; z-index:2; color:#fff;
+  padding: 0 60px;
+  max-width: 860px;
+}
+.hero-content h1 {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(46px,7vw,88px);
+  font-weight:400;
+  line-height:1.08;
+  margin-bottom:18px;
+  letter-spacing:-0.5px;
+}
+.hero-content h1 em {
+  color:#a8e6cf;
+  font-style:italic;
+}
+.hero-content p {
+  font-size:16px;
+  font-weight:300;
+  max-width:440px;
+  margin-bottom:32px;
+  line-height:1.75;
+  color:rgba(255,255,255,0.78);
+}
+.hero-btns { display:flex; gap:14px; flex-wrap:wrap; }
+.btn-primary {
+  background:var(--amber); color:#fff; padding:13px 28px; border-radius:6px;
+  font-size:14px; font-weight:500; text-decoration:none;
+  transition:all 0.25s; letter-spacing:0.3px;
+}
+.btn-primary:hover { background:var(--amber-dark); transform:translateY(-2px); box-shadow:0 6px 20px rgba(224,123,40,0.4); }
+.btn-outline {
+  background:transparent; color:#fff; padding:13px 28px; border-radius:6px;
+  font-size:14px; font-weight:500; text-decoration:none; border:1.5px solid rgba(255,255,255,0.4);
+  transition:all 0.25s;
+}
+.btn-outline:hover { background:rgba(255,255,255,0.1); border-color:#fff; }
+
+/* STATS — inline strip, not a grid wall */
+.stats-strip {
+  background: var(--dark);
+  padding: 28px 60px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+}
+.stats-strip .stat-item {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 0 48px 0 0;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  margin-right: 48px;
+  white-space: nowrap;
+}
+.stats-strip .stat-item:last-child {
+  border-right: none;
+  margin-right: 0;
+  padding-right: 0;
+}
+.stats-strip .stat-num {
+  font-family:'Playfair Display',serif;
+  font-size: 32px;
+  color: #fff;
+  font-weight: 700;
+  line-height: 1;
+}
+.stats-strip .stat-num span { color: #a8e6cf; }
+.stats-strip .stat-label {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  font-weight: 300;
+}
+
+/* ABOUT */
+.about {
+  display:grid; grid-template-columns:1fr 1fr;
+  max-width:1200px; margin:96px auto; gap:80px; padding:0 48px;
+  align-items:center;
+}
+.about-img-wrap { position:relative; }
+.about-img-wrap img {
+  width:100%; height:540px; object-fit:cover; border-radius:16px;
+  box-shadow:var(--shadow);
+}
+.about-badge {
+  position:absolute; bottom:32px; left:-28px;
+  background:#fff; border-radius:12px; padding:20px 24px;
+  box-shadow:0 12px 40px rgba(0,0,0,0.14);
+  display:flex; align-items:center; gap:16px;
+}
+.about-badge-icon { font-size:32px; }
+.about-badge-text strong { display:block; font-size:22px; color:var(--green); font-family:'Playfair Display',serif; }
+.about-badge-text span { font-size:12px; color:#888; }
+.about-text .eyebrow {
+  font-size:12px; letter-spacing:3px; text-transform:uppercase;
+  color:var(--amber); font-weight:500; margin-bottom:16px; display:block;
+}
+.about-text h2 {
+  font-family:'Playfair Display',serif; font-size:42px; line-height:1.2;
+  color:var(--dark); margin-bottom:24px;
+}
+.about-text p { font-size:15px; line-height:1.8; color:#5a5a5a; margin-bottom:16px; }
+
+/* FEATURE CARDS */
+.features { background:#f0f7f4; padding:80px 48px; }
+.features h2 {
+  font-family:'Playfair Display',serif; font-size:40px; text-align:center;
+  color:var(--dark); margin-bottom:12px;
+}
+.features .sub { text-align:center; color:#777; margin-bottom:56px; font-size:15px; }
+.feat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; max-width:1200px; margin:0 auto; }
+.feat-card {
+  background:#fff; border-radius:16px; overflow:hidden;
+  box-shadow:0 4px 20px rgba(0,0,0,0.07);
+  transition:all 0.3s;
+}
+.feat-card:hover { transform:translateY(-8px); box-shadow:0 16px 40px rgba(45,106,79,0.15); }
+.feat-card img { width:100%; height:220px; object-fit:cover; }
+.feat-card-body { padding:24px; }
+.feat-card-body h3 { font-family:'Playfair Display',serif; font-size:20px; margin-bottom:10px; color:var(--dark); }
+.feat-card-body p { font-size:14px; color:#777; line-height:1.7; margin-bottom:16px; }
+.feat-link { color:var(--green); font-size:13px; font-weight:500; text-decoration:none; letter-spacing:0.5px; }
+.feat-link:hover { color:var(--amber); }
+
+/* MOTTO STRIP */
+.motto-strip {
+  background:var(--dark); color:#fff; text-align:center; padding:80px 48px;
+  position:relative; overflow:hidden;
+}
+.motto-strip::before {
+  content:'🌿'; font-size:200px; position:absolute; top:-40px; left:-20px;
+  opacity:0.04; line-height:1;
+}
+.motto-strip::after {
+  content:'🌿'; font-size:200px; position:absolute; bottom:-40px; right:-20px;
+  opacity:0.04; line-height:1;
+}
+.motto-strip blockquote {
+  font-family:'Playfair Display',serif; font-size:clamp(22px,3.5vw,38px);
+  font-style:italic; max-width:800px; margin:0 auto;
+  line-height:1.5; position:relative; z-index:1;
+}
+.motto-strip blockquote::before { content:'\201C'; color:var(--amber); font-size:72px; line-height:0; vertical-align:-24px; margin-right:4px; }
+.motto-strip p { margin-top:24px; color:rgba(255,255,255,0.5); font-size:14px; letter-spacing:1px; }
+
+/* CTA SECTION */
+.cta-grid { display:grid; grid-template-columns:1fr 1fr; max-width:1200px; margin:80px auto; gap:28px; padding:0 48px; }
+.cta-card {
+  border-radius:16px; overflow:hidden; position:relative; min-height:280px;
+  display:flex; align-items:flex-end;
+}
+.cta-card img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.cta-card::after {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 60%);
+}
+.cta-body { position:relative; z-index:2; padding:32px; color:#fff; }
+.cta-body h3 { font-family:'Playfair Display',serif; font-size:28px; margin-bottom:8px; }
+.cta-body p { font-size:14px; opacity:0.8; margin-bottom:20px; }
+
+/* FOOTER */
+footer {
+  background:var(--dark); color:rgba(255,255,255,0.6); text-align:center;
+  padding:32px; font-size:13px;
+}
+footer strong { color:var(--amber); }
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(30px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+.hero-content {
+  animation: fadeUp 0.9s ease both;
+  animation-delay: 0.1s;
+  opacity: 0;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="home.html">Flora <span>Haven</span></a>
+  <div class="nav-links">
+    <a href="home.html" style="color: var(--amber);">Home</a>
+    <a href="uidProject.html">Shopping</a>
+    <a href="contact.html">Contact</a>
+    <a href="#about">About Us</a>
+    <a href="motto.html">Our Motto</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <h1>Grow a <em>greener</em><br>tomorrow</h1>
+    <p>Plants, perfumes, and vases — picked for people who actually care about what goes into their home.</p>
+    <div class="hero-btns">
+      <a href="uidProject.html" class="btn-primary">Shop Now</a>
+      <a href="#about" class="btn-outline">Our Story</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS — inline, not a gallery -->
+<div class="stats-strip">
+  <div class="stat-item">
+    <div class="stat-num">1200<span>+</span></div>
+    <div class="stat-label">plants sold</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">850<span>+</span></div>
+    <div class="stat-label">trees planted</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">300<span>+</span></div>
+    <div class="stat-label">volunteers joined</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-img-wrap">
+    <img src="ngo_2.jpg" alt="Plants">
+    <div class="about-badge">
+      <div class="about-badge-icon">🌱</div>
+      <div class="about-badge-text">
+        <strong>Since 2020</strong>
+        <span>Rooted in nature</span>
+      </div>
+    </div>
+  </div>
+  <div class="about-text">
+    <span class="eyebrow">Who We Are</span>
+    <h2>More Than a Store — A Green Movement</h2>
+    <p>Flora Haven is not just a store — it is a movement towards a greener and more sustainable future. We are an organic green initiative dedicated to promoting eco-friendly living by bringing nature closer to people's everyday lives.</p>
+    <p>What makes us unique is that we are also a non-governmental organization (NGO) driven by passionate individuals who believe in protecting and restoring our planet. Our members actively participate in tree plantation drives, urban gardening programs, and eco-education initiatives.</p>
+    <p>We believe change begins at home. A single plant on a windowsill can collectively create a powerful impact on the Earth. Together, we are not just growing plants — <strong>we are growing a better planet 🌍</strong></p>
+    <br>
+    <a href="motto.html" class="btn-primary" style="display:inline-block;">Read Our Motto</a>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <h2>Explore What We Offer</h2>
+  <p class="sub">Carefully curated products for a greener lifestyle</p>
+  <div class="feat-grid">
+    <div class="feat-card">
+      <img src="plantt.jpg" alt="Plants">
+      <div class="feat-card-body">
+        <h3>Indoor Plants</h3>
+        <p>From air-purifying snake plants to vibrant orchids — bring life indoors with our curated collection.</p>
+        <a href="uidProject.html#plants" class="feat-link">Shop Plants →</a>
+      </div>
+    </div>
+    <div class="feat-card">
+      <img src="vase.jpg" alt="Vases">
+      <div class="feat-card-body">
+        <h3>Artisan Vases</h3>
+        <p>Ceramic, marble, wooden — every vase tells a story. Find the perfect home for your blooms.</p>
+        <a href="uidProject.html#vases" class="feat-link">Shop Vases →</a>
+      </div>
+    </div>
+    <div class="feat-card">
+      <img src="perfumee.jpg" alt="Perfumes">
+      <div class="feat-card-body">
+        <h3>Nature Perfumes</h3>
+        <p>Botanical fragrances inspired by meadows, forests, and blooms. Luxury meets nature.</p>
+        <a href="uidProject.html#perfumes" class="feat-link">Shop Perfumes →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MOTTO STRIP -->
+<div class="motto-strip">
+  <blockquote>Bringing Nature, Beauty, and Freshness into Every Home</blockquote>
+  <p>— Flora Haven</p>
+</div>
+
+<!-- CTA GRID -->
+<section class="cta-grid">
+  <div class="cta-card">
+    <img src="shopnow.jpg" alt="Shop">
+    <div class="cta-body">
+      <h3>Start Shopping</h3>
+      <p>Explore 40+ plants, vases and perfumes curated for you.</p>
+      <a href="uidProject.html" class="btn-primary">Go to Store</a>
+    </div>
+  </div>
+  <div class="cta-card">
+    <img src="enrollnow.jpg" alt="Volunteer">
+    <div class="cta-body">
+      <h3>Join Our Mission</h3>
+      <p>Be part of our green movement. Enroll as a volunteer.</p>
+      <a href="enroll.html" class="btn-primary">Enroll Now</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 <strong>Flora Haven</strong> | Growing a Greener Tomorrow 🌍</p>
+</footer>
+
+</body>
+</html>

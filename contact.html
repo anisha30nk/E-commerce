@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us - Flora Haven</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:'DM Sans',sans-serif;
+background:#f1f8f4;
+color:#333;
+}
+
+/* HEADER */
+.header{
+background:
+linear-gradient(rgba(27,67,50,0.85),rgba(27,67,50,0.85)),
+url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6');
+background-size:cover;
+background-position:center;
+color:white;
+text-align:center;
+padding:80px 20px;
+}
+
+.header h1{
+font-size:40px;
+margin:0;
+font-family:'Playfair Display',serif;
+}
+
+.header p{
+margin-top:10px;
+opacity:0.9;
+}
+
+/* SECTION */
+.section{
+max-width:1100px;
+margin:60px auto;
+padding:0 20px;
+}
+
+.section h2{
+text-align:center;
+margin-bottom:40px;
+color:#1b4332;
+}
+
+/* STORES */
+.store-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.store-card{
+background:white;
+padding:20px;
+border-radius:12px;
+border-left:5px solid #e07b28; /* orange */
+box-shadow:0 6px 15px rgba(0,0,0,0.08);
+transition:0.3s;
+cursor:pointer;
+}
+
+.store-card:hover{
+transform:translateY(-6px);
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+.store-card h3{
+color:#1b4332;
+}
+
+.store-card p{
+color:#555;
+font-size:14px;
+}
+
+/* INFO */
+.info-row{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:30px;
+}
+
+.info-card{
+background:linear-gradient(135deg,#ffffff,#e8f5e9);
+padding:30px;
+border-radius:15px;
+transition:0.4s;
+box-shadow:0 8px 20px rgba(0,0,0,0.08);
+border-top:4px solid #1b4332;
+}
+
+.info-card:hover{
+transform:translateY(-10px);
+box-shadow:0 15px 35px rgba(0,0,0,0.15);
+}
+
+.info-card h3{
+margin-bottom:15px;
+color:#1b4332;
+}
+
+.info-card p{
+color:#444;
+font-size:14px;
+}
+
+/* ISSUE */
+.issue-section{
+display:flex;
+flex-wrap:wrap;
+align-items:center;
+justify-content:space-between;
+gap:30px;
+background:linear-gradient(135deg,#d8f3dc,#ffffff);
+padding:40px;
+border-radius:15px;
+box-shadow:0 8px 25px rgba(0,0,0,0.08);
+position:relative;
+overflow:hidden;
+}
+
+.issue-section::after{
+content:"";
+position:absolute;
+width:200px;
+height:200px;
+background:rgba(224,123,40,0.2); /* orange glow */
+border-radius:50%;
+top:-50px;
+right:-50px;
+}
+
+.issue-text h2{
+margin:0 0 10px;
+color:#1b4332;
+}
+
+/* BUTTON */
+.btn{
+padding:14px 30px;
+background:#e07b28;
+color:white;
+text-decoration:none;
+border-radius:8px;
+font-weight:500;
+transition:0.3s;
+}
+
+.btn:hover{
+background:#b85c1a;
+transform:translateY(-3px);
+box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* FOOTER */
+.footer{
+background:#1b4332;
+color:white;
+text-align:center;
+padding:15px;
+margin-top:40px;
+font-size:14px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR (UNCHANGED EXACTLY) -->
+<nav style="background:rgba(26,26,26,0.97);backdrop-filter:blur(12px);padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:64px;border-bottom:1px solid rgba(255,255,255,0.06);position:sticky;top:0;z-index:1000;">
+  <a href="home.html" style="font-family:'Playfair Display',serif;color:#fff;font-size:22px;letter-spacing:1px;text-decoration:none;">Flora <span style="color:#e07b28;">Haven</span></a>
+  <div>
+    <a href="home.html" style="color:rgba(255,255,255,0.82);margin-left:32px;text-decoration:none;font-size:14px;font-weight:500;">Home</a>
+    <a href="uidProject.html" style="color:rgba(255,255,255,0.82);margin-left:32px;text-decoration:none;font-size:14px;font-weight:500;">Shopping</a>
+    <a href="contact.html" style="color:#e07b28;margin-left:32px;text-decoration:none;font-size:14px;font-weight:500;">Contact Us</a>
+    <a href="home.html#about" style="color:rgba(255,255,255,0.82);margin-left:32px;text-decoration:none;font-size:14px;font-weight:500;">About Us</a>
+    <a href="motto.html" style="color:rgba(255,255,255,0.82);margin-left:32px;text-decoration:none;font-size:14px;font-weight:500;">Our Motto</a>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<div class="header">
+<h1>Contact Flora Haven</h1>
+<p>We're here to help you</p>
+</div>
+<!-- STORES -->
+<div class="section">
+<h2>Our Stores</h2>
+<div class="store-grid">
+<!-- (your store cards unchanged) -->
+
+<div class="store-grid">
+
+<a href="https://www.google.com/maps?q=T+Nagar+Chennai" target="_blank" style="text-decoration:none;">
+<div class="store-card"><h3>𖡡 Chennai</h3><p>T Nagar</p><p>☏ +91 98765 12345</p></div>
+</a>
+
+<a href="https://www.google.com/maps?q=Indiranagar+Bangalore" target="_blank" style="text-decoration:none;">
+<div class="store-card"><h3>𖡡 Bangalore</h3><p>Indiranagar</p><p>☏ +91 98765 22345</p></div>
+</a>
+
+<a href="https://www.google.com/maps?q=Andheri+West+Mumbai" target="_blank" style="text-decoration:none;">
+<div class="store-card"><h3>𖡡 Mumbai</h3><p>Andheri West</p><p>☏ +91 98765 32345</p></div>
+</a>
+
+<a href="https://www.google.com/maps?q=Connaught+Place+Delhi" target="_blank" style="text-decoration:none;">
+<div class="store-card"><h3>𖡡 Delhi</h3><p>Connaught Place</p><p>☏ +91 98765 42345</p></div>
+</a>
+
+<a href="https://www.google.com/maps?q=Banjara+Hills+Hyderabad" target="_blank" style="text-decoration:none;">
+<div class="store-card"><h3>𖡡 Hyderabad</h3><p>Banjara Hills</p><p>☏ +91 98765 52345</p></div>
+</a>
+
+<a href="https://www.google.com/maps?q=Park+Street+Kolkata" target="_blank" style="text-decoration:none;">
+<div class="store-card"><h3>𖡡 Kolkata</h3><p>Park Street</p><p>☏ +91 98765 62345</p></div>
+</a>
+
+<a href="https://www.google.com/maps?q=RS+Puram+Coimbatore" target="_blank" style="text-decoration:none;">
+<div class="store-card"><h3>𖡡 Coimbatore</h3><p>RS Puram</p><p>☏ +91 98765 72345</p></div>
+</a>
+
+<a href="https://www.google.com/maps?q=MG+Road+Cochin" target="_blank" style="text-decoration:none;">
+<div class="store-card"><h3>𖡡 Cochin</h3><p>MG Road</p><p>☏ +91 98765 82345</p></div>
+</a>
+
+</div>
+</div>
+
+<!-- INFO -->
+<div class="section">
+<h2>Get in Touch</h2>
+
+<div class="info-row">
+<div class="info-card"><h3>Customer Support</h3><p>+91 90000 11111</p><p>support@florahaven.com</p><p>Mon–Sat: 9 AM – 8 PM</p></div>
+<div class="info-card"><h3>Head Office</h3><p>Flora Haven Headquarters</p><p>Green Avenue, Eco Park Road</p><p>Chennai, Tamil Nadu - 600001</p></div>
+<div class="info-card"><h3>Follow Us</h3><p>Instagram: @florahaven</p><p>Facebook: Flora Haven</p><p>Twitter: @florahaven</p></div>
+</div>
+
+</div>
+
+<!-- ISSUE -->
+<div class="section">
+<div class="issue-section">
+
+<div class="issue-text">
+<h2>Have a Product Issue?</h2>
+<p>If you are facing any issue with your order, let us know and we will resolve it quickly.</p>
+</div>
+
+<div class="issue-action">
+<a href="enquriyform.html" class="btn">Report an Issue</a>
+</div>
+
+</div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+<p>© 2026 Flora Haven | Growing a Greener Tomorrow</p>
+</div>
+
+</body>
+</html>

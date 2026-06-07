@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Enroll - Flora Haven</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:'Inter',sans-serif;
+background:#f5f5f5;
+}
+
+/* NAVBAR stays same */
+
+/* GREEN HEADER */
+.header{
+background:#1b4332;
+color:white;
+text-align:center;
+padding:40px 20px;
+}
+
+/* BACKGROUND IMAGE SECTION */
+.main{
+background:
+linear-gradient(rgba(0,0,0,0.25),rgba(0,0,0,0.25)),
+url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6');
+background-size:cover;
+background-position:center;
+padding:50px 0;
+}
+
+/* FORM */
+.form-box{
+max-width:950px;
+margin:0 auto;
+background:rgba(255,255,255,0.48); /* ✅ transparent */
+padding:40px;
+border-radius:16px;
+box-shadow:0 6px 25px rgba(0,0,0,0.2);
+backdrop-filter:blur(6px); 
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+.full{grid-column:span 2;}
+
+.field{
+display:flex;
+flex-direction:column;
+}
+
+.field input,
+.field textarea,
+.field select{
+padding:12px;
+border:1px solid #ccc;
+border-radius:6px;
+transition:0.3s;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus{
+outline:none;
+border-color:#4CAF50;
+box-shadow:0 0 8px rgba(76,175,80,0.3);
+}
+
+.error{
+color:#d32f2f;
+font-size:12px;
+margin-top:4px;
+min-height:14px;
+}
+
+button{
+margin-top:20px;
+padding:14px;
+width:100%;
+background:#4CAF50;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+button:hover{background:#2e7d32;}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR (UNCHANGED) -->
+<nav style="background:rgba(26,26,26,0.97);backdrop-filter:blur(12px);padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:64px;border-bottom:1px solid rgba(255,255,255,0.06);position:sticky;top:0;z-index:1000;">
+  <a href="home.html" style="font-family:'Playfair Display',serif;color:#fff;font-size:22px;letter-spacing:1px;text-decoration:none;">Flora <span style="color:#e07b28;">Haven</span></a>
+  <div>
+    <a href="home.html" style="color:rgba(255,255,255,0.82);margin-left:32px;text-decoration:none;font-size:14px;font-weight:500;">Home</a>
+    <a href="uidProject.html" style="color:rgba(255,255,255,0.82);margin-left:32px;text-decoration:none;font-size:14px;font-weight:500;">Shopping</a>
+    <a href="contact.html" style="color:rgba(255,255,255,0.82);margin-left:32px;text-decoration:none;font-size:14px;font-weight:500;">Contact Us</a>
+    <a href="home.html#about" style="color:rgba(255,255,255,0.82);margin-left:32px;text-decoration:none;font-size:14px;font-weight:500;">About Us</a>
+    <a href="motto.html" style="color:rgba(255,255,255,0.82);margin-left:32px;text-decoration:none;font-size:14px;font-weight:500;">Our Motto</a>
+  </div>
+</nav>
+
+<!-- GREEN TITLE -->
+<div class="header">
+<h1>Join Our Green Movement</h1>
+</div>
+
+<!-- IMAGE BACKGROUND AREA -->
+<div class="main">
+
+<div class="form-box">
+
+<form id="enrollForm">
+
+<div class="grid">
+
+<div class="field">
+<input id="name" placeholder="Full Name">
+<span class="error" id="nameError"></span>
+</div>
+
+<div class="field">
+<select id="gender">
+<option value="">Select Gender</option>
+<option>Male</option>
+<option>Female</option>
+<option>Other</option>
+</select>
+<span class="error" id="genderError"></span>
+</div>
+
+<div class="field">
+<input id="age" type="number" placeholder="Age">
+<span class="error" id="ageError"></span>
+</div>
+
+<div class="field">
+<input id="email" placeholder="Email">
+<span class="error" id="emailError"></span>
+</div>
+
+<div class="field">
+<input id="phone" placeholder="Phone">
+<span class="error" id="phoneError"></span>
+</div>
+
+<div class="field">
+<input id="city" placeholder="City">
+<span class="error" id="cityError"></span>
+</div>
+
+<div class="field">
+<input id="pincode" placeholder="Pincode">
+<span class="error" id="pincodeError"></span>
+</div>
+
+<div class="field">
+<input id="occupation" placeholder="Occupation">
+<span class="error" id="occupationError"></span>
+</div>
+
+<div class="field">
+<select id="role">
+<option value="">Select Role</option>
+<option>Volunteer</option>
+<option>Tree Plantation</option>
+<option>Awareness Campaign</option>
+<option>Event Organizer</option>
+<option>Fundraising</option>
+</select>
+<span class="error" id="roleError"></span>
+</div>
+
+<div class="field">
+<input id="skills" placeholder="Skills">
+<span class="error" id="skillsError"></span>
+</div>
+
+<div class="field">
+<select id="availability">
+<option value="">Availability</option>
+<option>Weekends</option>
+<option>Weekdays</option>
+<option>Flexible</option>
+</select>
+<span class="error" id="availabilityError"></span>
+</div>
+
+<div class="field">
+<input id="emergency" placeholder="Emergency Contact">
+<span class="error" id="emergencyError"></span>
+</div>
+
+<div class="field full">
+<textarea id="address" placeholder="Address"></textarea>
+<span class="error" id="addressError"></span>
+</div>
+
+<div class="field full">
+<textarea id="message" placeholder="Why do you want to join?"></textarea>
+<span class="error" id="messageError"></span>
+</div>
+
+</div>
+
+<button type="submit">Enroll Now</button>
+
+</form>
+
+</div>
+
+</div>
+
+<script>
+
+const fields=["name","gender","age","email","phone","city","pincode",
+"occupation","role","skills","availability","emergency","address","message"];
+
+function validateField(id){
+let v=document.getElementById(id).value.trim();
+let error="";
+
+switch(id){
+case "name": if(v==="") error="Please enter your full name"; break;
+case "gender": if(v==="") error="Please select your gender"; break;
+case "age": if(v===""||v<18) error="Age must be above 18"; break;
+case "email": if(!/^\S+@\S+\.\S+$/.test(v)) error="Enter valid email"; break;
+case "phone": if(!/^\d{10}$/.test(v)) error="Phone must be 10 digits"; break;
+case "city": if(v==="") error="City required"; break;
+case "pincode": if(!/^\d{6}$/.test(v)) error="Pincode must be 6 digits"; break;
+case "occupation": if(v==="") error="Occupation required"; break;
+case "role": if(v==="") error="Select a role"; break;
+case "skills": if(v==="") error="Enter skills"; break;
+case "availability": if(v==="") error="Select availability"; break;
+case "emergency": if(!/^\d{10}$/.test(v)) error="Emergency must be 10 digits"; break;
+case "address": if(v==="") error="Address required"; break;
+case "message": if(v==="") error="Tell your reason"; break;
+}
+
+document.getElementById(id+"Error").innerText=error;
+return error==="";
+}
+
+fields.forEach(id=>{
+document.getElementById(id).addEventListener("input",()=>validateField(id));
+});
+
+document.getElementById("enrollForm").addEventListener("submit",function(e){
+e.preventDefault();
+
+let valid=true;
+
+fields.forEach(id=>{
+if(!validateField(id)) valid=false;
+});
+
+if(valid){
+alert("Your form has been submitted successfully! 🌿");
+window.location.href="motto.html";
+}
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flora Haven Account</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #e8ede4;
+            color: #2d4731;
+            line-height: 1.6;
+        }
+
+        /* NAVBAR */
+        nav {
+            background: #111;
+            color: white;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            color: #f28b30;
+            font-family: serif;
+            font-weight: bold;
+        }
+
+        /* Banner */
+        .banner {
+            background: #23412c;
+            height: 180px;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .banner h1 {
+            font-size: 50px;
+            font-family: serif;
+        }
+
+        /* Main Layout */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            gap: 30px;
+            padding: 30px 0;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: 30%;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .sidebar img {
+            width: 100px;
+            display: block;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            border: 3px solid #4f8a4b;
+        }
+
+        .sidebar h2 { text-align: center; margin-bottom: 5px; }
+        .sidebar p { text-align: center; font-size: 14px; color: #666; margin-bottom: 5px; }
+
+        .nav-buttons { margin-top: 20px; }
+
+        .sidebar button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 25px;
+            background: #4f8a4b;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .sidebar button:hover { background: #3e6d3a; transform: translateY(-2px); }
+        
+        .logout-btn { background: #8a4b4b !important; }
+        .logout-btn:hover { background: #6d3a3a !important; }
+
+        /* Content Area */
+        .content { width: 70%; }
+
+        .section {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .section h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-family: serif;
+            border-bottom: 2px solid #e8ede4;
+            padding-bottom: 10px;
+        }
+
+        /* Form Styling */
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            outline-color: #4f8a4b;
+        }
+
+        /* Product List Styling */
+        .product {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 15px;
+            border-radius: 12px;
+            transition: 0.3s;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+        }
+
+        .product:hover { background: #f0f4ef; transform: scale(1.01); }
+
+        .product img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        /* Tracking bar */
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: #eee;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress {
+            width: 60%;
+            height: 100%;
+            background: #4f8a4b;
+            transition: width 1s ease-in-out;
+        }
+
+        .status {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            font-weight: bold;
+            color: #666;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 850px) {
+            .container { flex-direction: column; width: 95%; }
+            .sidebar, .content { width: 100%; position: static; }
+            .banner h1 { font-size: 35px; }
+        }
+
+        #editForm { display: none; }
+    </style>
+</head>
+<body>
+
+
+<nav style="background:rgba(26,26,26,0.97);backdrop-filter:blur(12px);padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:64px;border-bottom:1px solid rgba(255,255,255,0.06);position:sticky;top:0;z-index:1000;">
+  
+  <a href="home.html" style="font-family:'Playfair Display',serif;color:#fff;font-size:22px;letter-spacing:1px;text-decoration:none;">
+    Flora <span style="color:#e07b28;">Haven</span>
+  </a>
+
+  <div>
+    <a href="home.html" style="color:rgba(255,255,255,0.82);margin-left:32px;text-decoration:none;font-size:14px;font-weight:500;">Home</a>
+    
+    <a href="uidProject.html" style="color:rgba(255,255,255,0.82);margin-left:32px;text-decoration:none;font-size:14px;font-weight:500;">Shopping</a>
+    
+    <a href="contact.html" style="color:rgba(255,255,255,0.82);margin-left:32px;text-decoration:none;font-size:14px;font-weight:500;">Contact Us</a>
+    
+    <a href="home.html#about" style="color:rgba(255,255,255,0.82);margin-left:32px;text-decoration:none;font-size:14px;font-weight:500;">About Us</a>
+    
+    <a href="motto.html" style="color:rgba(255,255,255,0.82);margin-left:32px;text-decoration:none;font-size:14px;font-weight:500;">Our Motto</a>
+  </div>
+
+</nav>
+
+<div class="banner">
+    <h1>My Account</h1>
+    <p>NATURE BASED GARDEN SHOP</p>
+</div>
+
+<div class="container">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile">
+        <h2 id="displayName">Lathika</h2>
+        <p id="displayEmail">lathika@gmail.com</p>
+        <p id="displayPhone">9876543210</p>
+        <p id="displayAddress">Coimbatore, Tamil Nadu</p>
+
+        <div class="nav-buttons">
+            <button onclick="toggleEdit()">Edit Profile</button>
+            <button onclick="scrollToSection('buyAgain')">Buy Again</button>
+            <button onclick="scrollToSection('recommend')">Recommended</button>
+            <button onclick="scrollToSection('track')">Track Order</button>
+            <button class="logout-btn" onclick="logout()">Log Out</button>
+        </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content">
+
+        <!-- EDIT FORM -->
+        <div class="section" id="editForm">
+            <h2>Edit Profile</h2>
+            <input type="text" id="nameInput" placeholder="Enter name">
+            <input type="email" id="emailInput" placeholder="Enter email">
+            <input type="text" id="phoneInput" placeholder="Enter phone number">
+            <textarea id="addressInput" rows="3" placeholder="Enter address"></textarea>
+            <button style="width:100%; padding:10px; background:#4f8a4b; color:white; border:none; border-radius:5px; cursor:pointer;" onclick="saveProfile()">Update Profile</button>
+        </div>
+
+        <!-- BUY AGAIN -->
+        <div class="section" id="buyAgain">
+            <h2>Buy Again</h2>
+            <div class="product" onclick="goToProduct('uidProject.html')">
+                <img src="https://images.unsplash.com/photo-1596547609652-9cf5d8d76921?w=200" alt="Aloe">
+                <div>
+                    <h3>Aloe Vera</h3>
+                    <p>$10.00</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TRACKING -->
+        <div class="section" id="track">
+            <h2>Track Orders</h2>
+            <p id="orderStatus">Your order is <strong>Shipped</strong></p>
+            <div class="progress-bar">
+                <div class="progress" id="progressBar" style="width: 60%;"></div>
+            </div>
+            <div class="status">
+                <span>Ordered</span>
+                <span>Shipped</span>
+                <span>Delivery</span>
+                <span>Arrived</span>
+            </div>
+            <button onclick="simulateDelivery()" style="background:none; color:#4f8a4b; border:1px solid #4f8a4b; margin-top:15px; padding:5px 15px; border-radius:20px; cursor:pointer;">Update Status</button>
+        </div>
+
+        <!-- RECOMMENDED -->
+        <div class="section" id="recommend">
+            <h2>Recommended for You</h2>
+            <div class="product" onclick="goToProduct('snake-plant.html')">
+                <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=200" alt="Snake Plant">
+                <div>
+                    <h3>Snake Plant</h3>
+                    <p>$12.00</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // Toggle the Edit Form visibility
+    function toggleEdit() {
+        let form = document.getElementById("editForm");
+        form.style.display = (form.style.display === "block") ? "none" : "block";
+    }
+
+    // Save Profile logic
+    function saveProfile() {
+        const name = document.getElementById("nameInput").value;
+        const email = document.getElementById("emailInput").value;
+        
+        if(name) document.getElementById("displayName").innerText = name;
+        if(email) document.getElementById("displayEmail").innerText = email;
+        
+        alert("Changes saved!");
+        toggleEdit();
+    }
+
+    // Smooth scroll to sections
+    function scrollToSection(id) {
+        document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+    }
+
+    // Navigation logic
+    function goToProduct(pageName) {
+        window.location.href = pageName;
+    }
+
+    function logout() {
+        if(confirm("Are you sure you want to log out?")) {
+            window.location.href = "uidProject.html"; // Redirects to login
+        } 
+    }
+
+    // Simulation for order tracking
+    function simulateDelivery() {
+        const bar = document.getElementById("progressBar");
+        const text = document.getElementById("orderStatus");
+        
+        bar.style.width = "100%";
+        text.innerHTML = "Your order has <strong>Arrived!</strong>";
+    }
+</script>
+
+</body>
+</html>

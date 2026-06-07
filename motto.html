@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Our Motto - Flora Haven</title>
+
+<style>
+:root{
+  --green:#2d6a4f;
+  --green-light:#40916c;
+  --green-pale:#d8f3dc;
+  --amber:#e07b28;
+  --amber-dark:#c96d1c;
+  --cream:#faf7f2;
+  --dark:#1a1a1a;
+  --text:#3d3d3d;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);}
+
+/* NAVBAR */
+nav{
+  background:rgba(26,26,26,0.97);
+  backdrop-filter:blur(12px);
+  padding:0 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  height:64px;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  position:sticky;top:0;z-index:100;
+}
+.nav-logo{font-family:'Playfair Display',serif;color:#fff;font-size:22px;letter-spacing:1px;text-decoration:none;}
+.nav-logo span{color:var(--amber);}
+.nav-links a{
+  color:rgba(255,255,255,0.82);margin-left:32px;text-decoration:none;
+  font-size:14px;font-weight:500;letter-spacing:0.4px;transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--amber);}
+.nav-links a.active{color:var(--amber);}
+
+/* HERO */
+.hero{height:380px;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(135deg,#1b4332,#2d6a4f,#40916c);}
+.hero-content{color:#fff;padding:0 24px;}
+.hero-content p{font-size:18px;opacity:0.88;letter-spacing:0.3px;}
+
+/* SECTIONS */
+.section{margin:64px auto;max-width:960px;padding:0 24px;}
+.section h2{font-family:'Playfair Display',serif;font-size:30px;font-weight:600;color:var(--green);margin-bottom:12px;text-align:center;}
+.section p{line-height:1.78;font-size:15.5px;margin-bottom:14px;text-align:justify;}
+.divider{width:56px;height:3px;background:var(--amber);margin:0 auto 28px;border-radius:2px;}
+
+/* VISION GRID */
+.vision-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-top:40px;}
+.vision-img{border-radius:14px;overflow:hidden;height:340px;}
+.vision-img img{width:100%;height:100%;object-fit:cover;}
+
+/* INITIATIVES GALLERY */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px;}
+.gallery-img{border-radius:12px;overflow:hidden;height:210px;}
+.gallery-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;}
+.gallery-img:hover img{transform:scale(1.07);}
+
+/* IMPACT */
+.impact-section{background:var(--green);color:#fff;padding:72px 24px;text-align:center;}
+.impact-section h2{font-family:'Playfair Display',serif;font-size:30px;margin-bottom:8px;color:#fff;}
+.impact-section .divider{background:var(--amber);}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:720px;margin:40px auto 0;}
+.stat-card{background:rgba(255,255,255,0.12);border-radius:14px;padding:32px 20px;border:1px solid rgba(255,255,255,0.18);}
+.stat-icon{font-size:32px;margin-bottom:12px;display:block;}
+.stat-num{font-family:'Playfair Display',serif;font-size:38px;font-weight:600;display:block;margin-bottom:6px;}
+.stat-label{font-size:14px;opacity:0.82;letter-spacing:0.3px;}
+
+/* ===================== SLIDING GALLERY ===================== */
+.slider-section{
+  padding:72px 0;
+  background:#fff;
+  overflow:hidden;
+}
+.slider-section .section-head{
+  text-align:center;
+  padding:0 24px;
+  margin-bottom:40px;
+}
+.slider-section h2{font-family:'Playfair Display',serif;font-size:30px;font-weight:600;color:var(--green);margin-bottom:12px;}
+
+.slider-wrapper{
+  position:relative;
+  max-width:1000px;
+  margin:0 auto;
+  padding:0 60px;
+}
+.slider-track-container{
+  overflow:hidden;
+  border-radius:16px;
+}
+.slider-track{
+  display:flex;
+  transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+.slide{
+  min-width:calc(33.333% - 12px);
+  margin-right:18px;
+  border-radius:14px;
+  overflow:hidden;
+  height:260px;
+  flex-shrink:0;
+  position:relative;
+}
+.slide img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform 0.4s ease;
+}
+.slide:hover img{transform:scale(1.06);}
+.slide-caption{
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(transparent,rgba(10,30,18,0.78));
+  color:#fff;
+  padding:24px 16px 14px;
+  font-size:14px;
+  font-weight:500;
+  letter-spacing:0.2px;
+  opacity:0;
+  transition:opacity 0.3s;
+}
+.slide:hover .slide-caption{opacity:1;}
+
+/* Prev / Next buttons */
+.slider-btn{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:44px;height:44px;border-radius:50%;
+  background:var(--green);color:#fff;border:none;
+  font-size:20px;cursor:pointer;z-index:10;
+  display:flex;align-items:center;justify-content:center;
+  transition:background 0.2s,transform 0.15s;
+  box-shadow:0 4px 14px rgba(0,0,0,0.18);
+}
+.slider-btn:hover{background:var(--green-light);transform:translateY(-50%) scale(1.08);}
+.slider-btn.prev{left:4px;}
+.slider-btn.next{right:4px;}
+
+/* Dots */
+.slider-dots{
+  display:flex;justify-content:center;gap:8px;
+  margin-top:24px;
+}
+.dot{
+  width:8px;height:8px;border-radius:50%;
+  background:#ccc;border:none;cursor:pointer;
+  transition:background 0.2s,transform 0.2s;
+  padding:0;
+}
+.dot.active{background:var(--green);transform:scale(1.3);}
+/* =========================================================== */
+
+/* CTA */
+.cta-section{text-align:center;padding:72px 24px;max-width:540px;margin:0 auto;}
+.cta-section h3{font-family:'Playfair Display',serif;font-size:28px;color:var(--green);margin-bottom:12px;}
+.cta-section p{color:#777;font-size:15px;margin-bottom:28px;line-height:1.7;}
+.btn{
+  display:inline-block;padding:14px 38px;
+  background:var(--amber);color:#fff;text-decoration:none;
+  border-radius:8px;font-weight:500;font-size:15px;letter-spacing:0.3px;
+  transition:background 0.2s,transform 0.2s;
+}
+.btn:hover{background:var(--amber-dark);transform:scale(1.04);}
+
+footer{background:#111;color:rgba(255,255,255,0.45);text-align:center;padding:24px;font-size:13px;}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a class="nav-logo" href="home.html">Flora <span>Haven</span></a>
+  <div class="nav-links">
+    <a href="home.html">Home</a>
+    <a href="uidProject.html">Shopping</a>
+    <a href="contact.html">Contact Us</a>
+    <a href="home.html#about">About Us</a>
+    <a href="motto.html" class="active">Our Motto</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <h1>Our Motto 🌿</h1>
+    <p>Building a Better Earth Together</p>
+  </div>
+</div>
+
+<!-- VISION -->
+<div class="section">
+  <h2>Our Vision for Earth</h2>
+  <div class="divider"></div>
+  <div class="vision-grid">
+    <div class="vision-text">
+      <p>At Flora Haven, our motto is to create a sustainable future where humans and nature coexist in harmony. With increasing pollution, deforestation, and environmental damage, the need for conscious living has never been more urgent.</p>
+      <p>We aim to reduce plastic usage, promote organic living, and encourage individuals to take small yet impactful steps toward protecting the environment. Whether it is adding greenery to homes or supporting eco-friendly products, every action contributes to a larger change.</p>
+      <p>We believe that the future of our planet lies in the hands of people who care — and together, we can make a lasting difference.</p>
+    </div>
+    <div class="vision-img">
+      <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80" alt="Sunlit green forest" />
+    </div>
+  </div>
+</div>
+
+<!-- INITIATIVES -->
+<div class="section" style="text-align:center;">
+  <h2>Our Initiatives</h2>
+  <div class="divider"></div>
+  <div class="gallery">
+    <div class="gallery-img">
+      <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=600&q=80" alt="Tree plantation" />
+    </div>
+    <div class="gallery-img">
+      <img src="https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=600&q=80" alt="Community volunteers" />
+    </div>
+    <div class="gallery-img">
+      <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&q=80" alt="Plants and greenery" />
+    </div>
+  </div>
+</div>
+
+<!-- IMPACT -->
+<div class="impact-section">
+  <h2>Our Impact</h2>
+  <div class="divider"></div>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <span class="stat-icon">🌱</span>
+      <span class="stat-num">1,000+</span>
+      <span class="stat-label">Plants Delivered</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-icon">🌳</span>
+      <span class="stat-num">500+</span>
+      <span class="stat-label">Trees Planted</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-icon">👥</span>
+      <span class="stat-num">300+</span>
+      <span class="stat-label">Volunteers Joined</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SLIDING GALLERY ===================== -->
+<section class="slider-section">
+  <div class="section-head">
+    <h2>Moments from the Ground</h2>
+    <div class="divider"></div>
+    <p style="color:#666;font-size:15px;max-width:520px;margin:0 auto;">A glimpse into the events, drives, and people that make our green mission alive every day.</p>
+  </div>
+
+  <div class="slider-wrapper">
+    <button class="slider-btn prev" id="prevBtn" aria-label="Previous">&#8592;</button>
+
+    <div class="slider-track-container">
+      <div class="slider-track" id="sliderTrack">
+
+        <div class="slide">
+          <img src="ngo1.webp" alt="Mountain nature" />
+          <div class="slide-caption">Nature's Peaks</div>
+        </div>
+        <div class="slide">
+          <img src="ngo9.jpeg" alt="Green lake" />
+          <div class="slide-caption">Green Waterways</div>
+        </div>
+        <div class="slide">
+          <img src="ngo10.jpg" alt="Aerial forest" />
+          <div class="slide-caption">Forest Canopy</div>
+        </div>
+        <div class="slide">
+          <img src="ngo4.jpg" alt="Sunlight forest" />
+          <div class="slide-caption">Morning Light</div>
+        </div>
+        <div class="slide">
+          <img src="ngo5.jpeg" alt="Hills landscape" />
+          <div class="slide-caption">Rolling Hills</div>
+        </div>
+        <div class="slide">
+          <img src="ngo6.jpg" alt="Misty river" />
+          <div class="slide-caption">Misty Rivers</div>
+        </div>
+        <div class="slide">
+          <img src="ngo7.avif" alt="Wildflowers" />
+          <div class="slide-caption">Wildflower Fields</div>
+        </div>
+        <div class="slide">
+          <img src="ngo8.jpg" alt="Community planting" />
+          <div class="slide-caption">Community Drive</div>
+        </div>
+
+      </div><!-- /slider-track -->
+    </div><!-- /slider-track-container -->
+
+    <button class="slider-btn next" id="nextBtn" aria-label="Next">&#8594;</button>
+
+    <!-- DOTS -->
+    <div class="slider-dots" id="sliderDots"></div>
+  </div>
+</section>
+<!-- =========================================================== -->
+
+<!-- CTA -->
+<div class="cta-section">
+  <h3>Join Our Mission 🌍</h3>
+  <p>Be part of our growing green movement and help us build a healthier planet for future generations.</p>
+  <a href="enroll.html" class="btn">Enroll Now</a>
+</div>
+
+<footer>© 2025 Flora Haven. All rights reserved.</footer>
+
+<script>
+  const track = document.getElementById('sliderTrack');
+  const slides = track.querySelectorAll('.slide');
+  const dotsContainer = document.getElementById('sliderDots');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
+  const visibleCount = 3;
+  const totalSlides = slides.length;
+  const maxIndex = totalSlides - visibleCount;
+  let current = 0;
+ 
+
+  // Build dots
+  const numDots = Math.ceil(totalSlides / visibleCount);
+  for(let i = 0; i < numDots; i++){
+    const dot = document.createElement('button');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goTo(i * visibleCount));
+    dotsContainer.appendChild(dot);
+  }
+
+  function updateDots(){
+    const dotIndex = Math.round(current / visibleCount);
+    dotsContainer.querySelectorAll('.dot').forEach((d, i) => {
+      d.classList.toggle('active', i === dotIndex);
+    });
+  }
+
+  function goTo(index){
+    current = Math.max(0, Math.min(index, maxIndex));
+    const slideWidth = slides[0].offsetWidth + 18;
+    track.style.transform = `translateX(-${current * slideWidth}px)`;
+    updateDots();
+  }
+
+  prevBtn.addEventListener('click', () => { goTo(current - 1);});
+  nextBtn.addEventListener('click', () => { goTo(current + 1);});
+
+
+
+  function resetAuto(){
+    clearInterval(autoTimer);
+    autoPlay();
+  }
+
+  // Recalculate on resize
+  window.addEventListener('resize', () => goTo(current));
+
+  
+</script>
+</body>
+</html>

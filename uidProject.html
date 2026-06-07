@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Plant Store</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
+<style>
+        /* --- ENHANCED BACKGROUNDS & FONTS --- */
+        body {
+            /* Soft botanical gradient */
+            background: linear-gradient(135deg, #f3f7f0 0%, #e2eadd 100%);
+            background-attachment: fixed;
+            font-family: 'Poppins', sans-serif; /* Clean, modern body font */
+            margin: 0;
+            color: #333;
+        }
+
+        .header {
+            background: #2d3e30; /* Deep forest green */
+            color: #f0f4ef;
+            text-align: center;
+            padding: 60px 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif; /* Elegant heading font */
+            font-size: 3.5rem;
+            margin: 0;
+            letter-spacing: 2px;
+            color: #fff;
+        }
+
+        .header p {
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 10px;
+            color: #a8c69f;
+        }
+
+        /* --- NAVIGATION --- */
+        .navbar {
+            background: rgba(45, 62, 48, 0.95);
+            backdrop-filter: blur(5px);
+            padding: 15px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #3e5241;
+        }
+
+        .navbar a {
+            color: #f0f4ef;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #ff9900;
+        }
+
+        /* --- CARDS & GRID --- */
+        .section {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2d3e30;
+        }
+
+       .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 30px; /* A slightly larger gap looks better with 3 items */
+}
+
+        .card {
+            background: #ffffff;
+            padding: 20px;
+            text-align: center;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+        }
+
+ .card img {
+    width: 100%;
+    height: 250px; /* This makes the images taller to match the wider cards */
+    object-fit: cover; /* This prevents the images from stretching */
+    border-radius: 10px;
+}
+        .card h3 {
+            font-family: 'Playfair Display', serif;
+            margin: 15px 0 5px 0;
+            font-size: 1.2rem;
+        }
+
+        .price {
+            color: #4a7c44;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        /* --- BUTTONS --- */
+        button {
+            padding: 10px 20px;
+            background: #4a7c44;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            transition: 0.3s;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #385e33;
+            box-shadow: 0 4px 10px rgba(74, 124, 68, 0.3);
+        }
+
+        /* --- CART & POPUPS --- */
+        .cart {
+            width: 100%;
+            max-width: 600px;
+            margin: 60px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        #cart-table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+            border: none;
+        }
+
+        #cart-table th {
+            background: #f8fbf7;
+            color: #2d3e30;
+            padding: 15px;
+            border-bottom: 2px solid #e2eadd;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+
+        .modal {
+            background-color: rgba(18, 26, 19, 0.95);
+        }
+
+        .popup-content {
+            border-radius: 20px;
+            padding: 40px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Existing functional CSS kept for logic */
+        .modal { display:none; position:fixed; z-index:2000; top:0; left:0; width:100%; height:100%; overflow:auto; text-align:center; }
+        .modal-content { max-width:80%; max-height:70vh; margin-top:50px; border-radius:10px; }
+        .close { position:fixed; top:20px; right:35px; color:white; font-size:40px; cursor:pointer; }
+        .popup { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:3000; }
+        html { scroll-behavior: smooth; }
+
+        .cart-panel {
+    height: 100%;
+    width: 0; /* Hidden by default */
+    position: fixed;
+    z-index: 3000;
+    top: 0;
+    right: 0;
+    background-color: white;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+}
+
+.cart-content { padding: 25px; }
+
+.close-cart {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 36px;
+    cursor: pointer;
+} 
+
+:root {
+  --nav-bg: #1a1a1a;
+  --amber: #e07b28;
+  --text-white: rgba(255, 255, 255, 0.9);
+}
+
+/* Remove default margins/padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between; /* Pushes logo left, links right */
+  align-items: center;
+  background-color: var(--nav-bg);
+  padding: 0 60px; /* Space on the sides */
+  height: 80px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  font-family: 'Playfair Display', serif; /* Matching the elegant font in image */
+}
+
+.logo {
+  font-size: 24px;
+  color: white;
+  text-decoration: none;
+  letter-spacing: 1px;
+}
+
+.logo span {
+  color: var(--amber); /* This creates the 'Haven' orange effect */
+  margin-left: 5px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 35px; /* Space between links */
+}
+
+.nav-links a {
+  color: var(--text-white);
+  text-decoration: none;
+  font-family: 'DM Sans', sans-serif; /* Cleaner font for links */
+  font-size: 15px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--amber);
+}
+:root {
+  --nav-bg: #1a1a1a;
+  --amber: #e07b28;
+}
+
+/* Dark Top Bar Styling */
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--nav-bg);
+  padding: 0 50px;
+  height: 70px;
+  position: sticky;
+  top: 0;
+  z-index: 1001;
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  color: white;
+  text-decoration: none;
+}
+
+.logo span {
+  color: var(--amber);
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--amber);
+}
+
+/* White Sub Bar Styling */
+.sub-nav {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  top: 70px; /* Sits right under the 70px top bar */
+  z-index: 1000;
+}
+
+.sub-links {
+  display: flex;
+  gap: 40px;
+}
+
+.sub-links a {
+  text-decoration: none;
+  color: #333;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+
+    </style>
+
+</head>
+
+<body>
+    <!-- TOP BAR (DARK) - Matches image_197f6a.png and WhatsApp Image 2026-05-03 at 4.32.41 PM.jpeg -->
+<nav class="top-nav">
+  <a href="index.html" class="logo">Flora <span>Haven</span></a>
+  <div class="nav-links">
+    <a href="home.html">Home</a>
+    <a href="uidProject.html" style="color: var(--amber);">Shopping</a>
+    <a href="contact.html">Contact Us</a> 
+    <a href="home.html#about">About Us</a>
+    <a href="home.html#motto">Our Motto</a>
+  </div>
+</nav>
+
+<!-- BOTTOM BAR (WHITE) -->
+<div class="sub-nav">
+  <div class="sub-links">
+    <a href="#plants">PLANTS</a>
+    <a href="#vases">VASES</a>
+    <a href="#perfumes">PERFUMES</a>
+    <a href="javascript:void(0)" onclick="openCart()" class="cart-trigger">CART 🛒</a>
+    <a href="profile.html">Profile</a>
+  </div>
+</div>
+
+<!-- NEW SIDE CART PANEL -->
+<div id="myCartPanel" class="cart-panel">
+    <span class="close-cart" onclick="closeCart()">&times;</span>
+    <div class="cart-content">
+        <h2>Your Basket</h2>
+        <table id="cart-table">
+            <!-- Table content is generated by JS -->
+        </table>
+        <hr>
+        <div style="margin-top:20px;">
+            <b style="font-size: 1.2rem;">Total: $<span id="total-val">0</span></b>
+            <button onclick="checkout()" style="margin-top:15px;">Checkout Now</button>
+        </div>
+    </div>
+</div>
+
+<div class="header">
+<h1>FLORA HAVEN</h1>
+<p>Nature Based Garden Shop</p>
+</div>
+
+
+<!-- PLANTS SECTION -->
+ <div class="section" id="plants">
+
+<div class="section">
+
+<h2>Plants</h2>
+
+<div class="grid">
+
+<div class="card">
+
+<img src="aleo.jpg" onclick="openImage('aleo.jpg','Aloe Vera','Medicinal plant','$10')">
+<h3>Aloe Vera</h3>
+<p>Medicinal plant</p>
+<p class="price">$10</p>
+<button onclick="addToCart('Aloe Vera',10)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="snake.jpg" onclick="openImage('snake.jpg','Snake Plant','Air purifier','$12')">
+
+<h3>Snake Plant</h3>
+<p>Air purifier</p>
+<p class="price">$12</p>
+<button onclick="addToCart('Snake Plant',12)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="peace.webp" onclick="openImage('peace.webp','Peace Lily','Indoor flower','$15')">
+
+<h3>Peace Lily</h3>
+<p>Indoor flower</p>
+<p class="price">$15</p>
+<button onclick="addToCart('Peace Lily',15)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="spider.jpg" onclick="openImage('spider.jpg','Spider Plant','Easy plant','$9')">
+<h3>Spider Plant</h3>
+<p>Easy plant</p>
+<p class="price">$9</p>
+<button onclick="addToCart('Spider Plant',9)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="money.webp" onclick="openImage('money.webp','Money Plant','Lucky plant','$11')">
+
+<h3>Money Plant</h3>
+<p>Lucky plant</p>
+<p class="price">$11</p>
+<button onclick="addToCart('Money Plant',11)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="bamboo.jpg" onclick="openImage('bamboo.jpg','Bamboo','Lucky bamboo','$13')">
+
+<h3>Bamboo</h3>
+<p>Lucky bamboo</p>
+<p class="price">$13</p>
+<button onclick="addToCart('Bamboo',13)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="jade.jpg" onclick="openImage('jade.jpg','Jade Plant','Succulent','$14')">
+
+<h3>Jade Plant</h3>
+<p>Succulent</p>
+<p class="price">$14</p>
+<button onclick="addToCart('Jade Plant',14)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="lavender.jpg" onclick="openImage('lavender.jpg','Lavender','Fragrant herb','$16')">
+
+<h3>Lavender</h3>
+<p>Fragrant herb</p>
+<p class="price">$16</p>
+<button onclick="addToCart('Lavender',16)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="rose.jpg" onclick="openImage('rose.jpg','Rose','Classic flower','$18')">
+
+<h3>Rose</h3>
+<p>Classic flower</p>
+<p class="price">$18</p>
+<button onclick="addToCart('Rose',18)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="mint.jpg" onclick="openImage('mint.jpg','Mint','Herb plant','$7')">
+
+<h3>Mint</h3>
+<p>Herb plant</p>
+<p class="price">$7</p>
+<button onclick="addToCart('Mint',7)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="tulsi.jpg" onclick="openImage('tulsi.jpg','Tulsi','Holy plant','$8')">
+
+<h3>Tulsi</h3>
+<p>Holy plant</p>
+<p class="price">$8</p>
+<button onclick="addToCart('Tulsi',8)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="orchid.webp" onclick="openImage('orchid.webp','Orchid','Decorative flower','$20')">
+
+<h3>Orchid</h3>
+<p>Decorative flower</p>
+<p class="price">$20</p>
+<button onclick="addToCart('Orchid',20)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="cactus.webp" onclick="openImage('cactus.webp','Cactus','Desert plant','$6')">
+
+<h3>Cactus</h3>
+<p>Desert plant</p>
+<p class="price">$6</p>
+<button onclick="addToCart('Cactus',6)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="fern.webp" onclick="openImage('fern.webp','Fern','Green indoor','$10')">
+
+<h3>Fern</h3>
+<p>Green indoor</p>
+<p class="price">$10</p>
+<button onclick="addToCart('Fern',10)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="gera.webp" onclick="openImage('gera.webp','Geranium','Colorful plant','$12')">
+
+<h3>Geranium</h3>
+<p>Colorful plant</p>
+<p class="price">$12</p>
+<button onclick="addToCart('Geranium',12)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="ber.webp" onclick="openImage('ber.webp','Begonia','Flower plant','$14')">
+
+<h3>Begonia</h3>
+<p>Flower plant</p>
+<p class="price">$14</p>
+<button onclick="addToCart('Begonia',14)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="sun.jpg" onclick="openImage('sun.jpg','Sunflower','Bright flower','$17')">
+
+<h3>Sunflower</h3>
+<p>Bright flower</p>
+<p class="price">$17</p>
+<button onclick="addToCart('Sunflower',17)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="daisy.jpg" onclick="openImage('daisy.jpg','Daisy','Garden flower','$11')">
+
+<h3>Daisy</h3>
+<p>Garden flower</p>
+<p class="price">$11</p>
+<button onclick="addToCart('Daisy',11)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="pet.jpg" onclick="openImage('pet.jpg','Petunia','Colorful flowers','$12')">
+
+<h3>Petunia</h3>
+<p>Colorful flowers</p>
+<p class="price">$12</p>
+<button onclick="addToCart('Petunia',12)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="chy.jpg" onclick="openImage('chy.jpg','Chrysanthemum','Decor flower','$15')">
+<h3>Chrysanthemum</h3>
+<p>Decor flower</p>
+<p class="price">$15</p>
+<button onclick="addToCart('Chrysanthemum',15)">Add to Cart</button>
+</div>
+
+</div>
+</div>
+</div>
+
+
+<!-- VASE SECTION -->
+ <div class="section" id="vases">
+
+<div class="section">
+
+<h2>Vases</h2>
+
+<div class="grid">
+
+<div class="card">
+<img src="cera.jpg" onclick="openImage('cera.jpg','Ceramic Vase','Classic vase','$20')">
+
+<h3>Ceramic Vase</h3>
+<p class="price">$20</p>
+<button onclick="addToCart('Ceramic Vase',20)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="glass.webp" onclick="openImage('glass.webp','Glass Vase','Transparent vase','$18')">
+
+<h3>Glass Vase</h3>
+<p class="price">$18</p>
+<button onclick="addToCart('Glass Vase',18)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="clay.webp" onclick="openImage('clay.webp','Clay Vase','Traditional vase','$15')">
+
+<h3>Clay Vase</h3>
+<p class="price">$15</p>
+<button onclick="addToCart('Clay Vase',15)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="metal.webp" onclick="openImage('metal.webp','Metal Vase','Modern vase','$25')">
+
+<h3>Metal Vase</h3>
+<p class="price">$25</p>
+<button onclick="addToCart('Metal Vase',25)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="stone.webp" onclick="openImage('stone.webp','Stone Vase','Heavy vase','$30')">
+
+<h3>Stone Vase</h3>
+<p class="price">$30</p>
+<button onclick="addToCart('Stone Vase',30)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="mini.jpg" onclick="openImage('mini.jpg','Mini Vase','Small decor','$10')">
+
+<h3>Mini Vase</h3>
+<p class="price">$10</p>
+<button onclick="addToCart('Mini Vase',10)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="wood.webp" onclick="openImage('wood.webp','Wooden Vase','Natural style','$22')">
+
+<h3>Wooden Vase</h3>
+<p class="price">$22</p>
+<button onclick="addToCart('Wooden Vase',22)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="painted.webp" onclick="openImage('painted.webp','Painted Vase','Art design','$24')">
+
+<h3>Painted Vase</h3>
+<p class="price">$24</p>
+<button onclick="addToCart('Painted Vase',24)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="marble.webp" onclick="openImage('marble.webp','Marble Vase','Premium vase','$35')">
+
+<h3>Marble Vase</h3>
+<p class="price">$35</p>
+<button onclick="addToCart('Marble Vase',35)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="vin.webp" onclick="openImage('vin.webp','Vintage Vase','Antique style','$28')">
+<h3>Vintage Vase</h3>
+<p class="price">$28</p>
+<button onclick="addToCart('Vintage Vase',28)">Add to Cart</button>
+</div>
+
+</div>
+</div>
+</div>
+<!-- PERFUME -->
+ <div class="section" id="perfumes">
+
+<h2>Perfumes</h2>
+
+<div class="grid">
+
+<div class="card">
+<img src="rosep.webp" onclick="openImage('rosep.webp','Rose Perfume','Floral fragrance','$25')">
+<h3>Rose Perfume</h3>
+<p>Floral fragrance</p>
+<p class="price">$25</p>
+<button onclick="addToCart('Rose Perfume',25)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="lavp.jpg" onclick="openImage('lavp.jpg','Lavender Mist','Relaxing scent','$22')">
+<h3>Lavender Mist</h3>
+<p>Relaxing scent</p>
+<p class="price">$22</p>
+<button onclick="addToCart('Lavender Mist',22)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="ocean.webp" onclick="openImage('ocean.webp','Ocean Breeze','Fresh fragrance','$28')">
+<h3>Ocean Breeze</h3>
+<p>Fresh fragrance</p>
+<p class="price">$28</p>
+<button onclick="addToCart('Ocean Breeze',28)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="van.webp" onclick="openImage('van.webp','Vanilla Dream','Sweet scent','$24')">
+<h3>Vanilla Dream</h3>
+<p>Sweet scent</p>
+<p class="price">$24</p>
+<button onclick="addToCart('Vanilla Dream',24)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="oud.jpg" onclick="openImage('oud.jpg','Luxury Oud','Rich fragrance','$35')">
+<h3>Luxury Oud</h3>
+<p>Rich fragrance</p>
+<p class="price">$35</p>
+<button onclick="addToCart('Luxury Oud',35)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="jasp.webp" onclick="openImage('jasp.webp','Jasmine Bliss','Floral rich scent','$35')">
+<h3>Jasmine Bliss</h3>
+<p>Floral rich scent</p>
+<p class="price">$35</p>
+<button onclick="addToCart('Jasmine Bliss',35)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="gar.jpg" onclick="openImage('gar.jpg','Garden Whisper','Soft floral scent','$35')">
+<h3>Garden Whisper</h3>
+<p>Soft floral scent</p>
+<p class="price">$35</p>
+<button onclick="addToCart('Garden Whisper',35)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="scen.webp" onclick="openImage('scen.webp','Scentra','Luxury modern scent','$35')">
+<h3>Scentra</h3>
+<p>Luxury modern scent</p>
+<p class="price">$35</p>
+<button onclick="addToCart('Scentra',35)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="novique.webp" onclick="openImage('novique.webp','Novique','Premium fragrance','$35')">
+<h3>Novique</h3>
+<p>Premium fragrance</p>
+<p class="price">$35</p>
+<button onclick="addToCart('Novique',35)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="ar.jpg" onclick="openImage('ar.jpg','Aeriscent','Fresh airy scent','$35')">
+<h3>Aeriscent</h3>
+<p>Fresh airy scent</p>
+<p class="price">$35</p>
+<button onclick="addToCart('Aeriscent',35)">Add to Cart</button>
+</div>
+
+
+</div>
+</div>
+
+
+
+
+
+<script>
+
+window.onload = function(){
+window.scrollTo(0,0);
+}
+
+let total = 0
+let cart = []
+
+function addToCart(name, price){
+
+let found = false
+
+// check if item already exists
+for(let i=0;i<cart.length;i++){
+    if(cart[i].name === name){
+        cart[i].qty++
+        found = true
+        break
+    }
+}
+
+if(!found){
+    cart.push({name:name, price:price, qty:1})
+}
+
+updateCart()
+}
+
+function updateCart(){
+
+let table = document.getElementById("cart-table")
+
+// clear table except header
+table.innerHTML = `
+<tr>
+<th>S.No</th>
+<th>Item</th>
+<th>Qty</th>
+<th>Price</th>
+<th>Total</th>
+</tr>
+`
+
+total = 0
+
+for(let i=0;i<cart.length;i++){
+
+let item = cart[i]
+let rowTotal = item.price * item.qty
+total += rowTotal
+
+let row = `
+<tr>
+<td>${i+1}</td>
+<td>${item.name}</td>
+<td>${item.qty}</td>
+<td>$${item.price}</td>
+<td>$${rowTotal}</td>
+</tr>
+`
+
+table.innerHTML += row
+}
+
+document.getElementById("total-val").innerText = total
+}
+
+function checkout() {
+    if (total > 0) {
+        // 1. Show the success message
+        alert("Order placed successfully for $" + total + "!");
+        
+        // 2. Clear the cart and refresh the page
+        location.reload(); 
+    } else {
+        alert("Your cart is empty!");
+    }
+}
+function submitFeedback(){
+
+let text = document.getElementById("feedback-text").value
+
+if(text.trim() === ""){
+alert("Please enter feedback")
+return
+}
+
+alert("Thank you for your feedback ❤️")
+
+location.reload()
+}
+
+function closePopup(){
+document.getElementById("feedback-popup").style.display = "none"
+}
+function openImage(src, name, desc, price){
+
+document.getElementById("imageModal").style.display = "block"
+
+document.getElementById("modalImg").src = src
+
+document.getElementById("caption").innerHTML =
+"<h2>"+name+"</h2><p>"+desc+"</p><b>"+price+"</b>"
+}
+
+function closeImage(){
+document.getElementById("imageModal").style.display = "none"
+}
+
+function openCart() {
+    document.getElementById("myCartPanel").style.width = "400px";
+}
+
+function closeCart() {
+    document.getElementById("myCartPanel").style.width = "0";
+}
+
+// Update your existing addToCart to include openCart() at the end
+function addToCart(name, price){
+    let found = false;
+    for(let i=0; i<cart.length; i++){
+        if(cart[i].name === name){
+            cart[i].qty++;
+            found = true;
+            break;
+        }
+    }
+    if(!found){ cart.push({name:name, price:price, qty:1}); }
+    updateCart();
+    openCart(); // This makes the cart slide out when you buy something!
+}
+
+</script>
+
+<
+<div id="imageModal" class="modal">
+
+<span class="close" onclick="closeImage()">&times;</span>
+
+<img class="modal-content" id="modalImg">
+
+<div id="caption"></div>
+
+</div>
+
+
+</body>
+</html>
